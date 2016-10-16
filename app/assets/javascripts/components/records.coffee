@@ -5,9 +5,8 @@
   getDefaultProps: ->
     records: []
   addRecord: (record) ->
-      records = @state.records.slice()
-      records.push record
-      @setState records: records
+    records = React.addons.update(@state.records, { $push: [record] })
+    @setState records: records
   credits: ->
     credits = @state.records.filter (val) -> val.amount >= 0
     credits.reduce ((prev, curr) ->
@@ -22,10 +21,9 @@
     @debits() + @credits()
   
   deleteRecord: (record) ->
-      records = @state.records.slice()
-      index = records.indexOf record
-      records.splice index, 1
-      @replaceState records: records
+    index = @state.records.indexOf record
+    records = React.addons.update(@state.records, { $splice: [[index, 1]] })
+    @replaceState records: records
   
   render: ->
     React.DOM.div
@@ -53,7 +51,9 @@
             # When we handle dynamic children (in this case, records) we need to provide 
             # a key property to the dynamically generated elements so React won't have a 
             # hard time refreshing our UI, that's why we send key: record.id along with 
-            # the actual record when creating Record elements. 
+            # the actual record when creating Record elements.
+            # The call to handleDeleteRecord allows for the record to be deleted from the UI
+            # and is prompted by the handleDelete method in the 'record' component
             React.createElement Record, key: record.id, record: record, handleDeleteRecord: @deleteRecord
           
 # alternate method in JSX syntax
