@@ -1,9 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
 
 * Ruby version
 
@@ -20,6 +16,13 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+For C9 cloud server un command line to start use:
+$ rails server -b $IP -p $PORT
 
-* ...
+* Special Gems
 # react-rails
+
+# Implementaton of Accounts app Based on tutorial on airpair.com
+https://www.airpair.com/reactjs/posts/reactjs-a-guide-for-rails-developers
+
+
