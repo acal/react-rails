@@ -1,0 +1,5 @@
+<%# this file will act as a bridge between our Rails app and our React Components %>
+<%# app/views/records/index.html.erb %>
+<%# 'react_componnent' helper is provided by the react-rails gem %>
+
+<%= react_component 'Records', { data: @records } %>
