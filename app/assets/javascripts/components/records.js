@@ -11,14 +11,6 @@
         records: []
       };
     },
-    addRecord: function(record) {
-      var records;
-      records = this.state.records.slice();
-      records.push(record);
-      return this.setState({
-        records: records
-      });
-    },
     credits: function() {
       var credits;
       credits = this.state.records.filter(function(val) {
@@ -40,11 +32,31 @@
     balance: function() {
       return this.debits() + this.credits();
     },
+    addRecord: function(record) {
+      var records;
+      records = React.addons.update(this.state.records, {
+        $push: [record]
+      });
+      return this.setState({
+        records: records
+      });
+    },
     deleteRecord: function(record) {
       var index, records;
-      records = this.state.records.slice();
-      index = records.indexOf(record);
-      records.splice(index, 1);
+      index = this.state.records.indexOf(record);
+      records = React.addons.update(this.state.records, {
+        $splice: [[index, 1]]
+      });
+      return this.replaceState({
+        records: records
+      });
+    },
+    updateRecord: function(record, data) {
+      var index, records;
+      index = this.state.records.indexOf(record);
+      records = React.addons.update(this.state.records, {
+        $splice: [[index, 1, data]]
+      });
       return this.replaceState({
         records: records
       });
@@ -52,7 +64,7 @@
     render: function() {
       var record;
       return React.DOM.div({
-        className: 'container records'
+        className: 'records'
       }, React.DOM.h2({
         className: 'title'
       }, 'Records'), React.DOM.div({
@@ -82,7 +94,8 @@
           results.push(React.createElement(Record, {
             key: record.id,
             record: record,
-            handleDeleteRecord: this.deleteRecord
+            handleDeleteRecord: this.deleteRecord,
+            handleEditRecord: this.updateRecord
           }));
         }
         return results;
