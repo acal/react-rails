@@ -27,3 +27,12 @@ https://www.airpair.com/reactjs/posts/reactjs-a-guide-for-rails-developers
 
 We are using jQuery to interact with our backend, and Rails' jquery_ujs unobtrusive driver will include the CSRF token on every AJAX request for us
 
+JSX is not used but transcribed into coffescript.
+For JS/JSX Git repo go here: https://github.com/rickster88/accounts-react-rails-jsx
+For JSX and ES6 Git repo go here: https://github.com/alexdaube/accounts-react-rails-jsx-ES6
+
+
+
+
+
+
