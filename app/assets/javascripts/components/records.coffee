@@ -20,9 +20,16 @@
     ), 0
   balance: ->
     @debits() + @credits()
+  
+  deleteRecord: (record) ->
+      records = @state.records.slice()
+      index = records.indexOf record
+      records.splice index, 1
+      @replaceState records: records
+  
   render: ->
     React.DOM.div
-      className: 'records'
+      className: 'container records'
       React.DOM.h2
         className: 'title'
         'Records'
@@ -40,9 +47,14 @@
             React.DOM.th null, 'Date'
             React.DOM.th null, 'Title'
             React.DOM.th null, 'Amount'
+            React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for record in @state.records
-            React.createElement Record, key: record.id, record: record
+            # When we handle dynamic children (in this case, records) we need to provide 
+            # a key property to the dynamically generated elements so React won't have a 
+            # hard time refreshing our UI, that's why we send key: record.id along with 
+            # the actual record when creating Record elements. 
+            React.createElement Record, key: record.id, record: record, handleDeleteRecord: @deleteRecord
           
 # alternate method in JSX syntax
 # render: ->

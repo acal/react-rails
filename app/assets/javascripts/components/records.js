@@ -40,10 +40,19 @@
     balance: function() {
       return this.debits() + this.credits();
     },
+    deleteRecord: function(record) {
+      var index, records;
+      records = this.state.records.slice();
+      index = records.indexOf(record);
+      records.splice(index, 1);
+      return this.replaceState({
+        records: records
+      });
+    },
     render: function() {
       var record;
       return React.DOM.div({
-        className: 'records'
+        className: 'container records'
       }, React.DOM.h2({
         className: 'title'
       }, 'Records'), React.DOM.div({
@@ -64,7 +73,7 @@
         handleNewRecord: this.addRecord
       }), React.DOM.hr(null), React.DOM.table({
         className: 'table table-bordered'
-      }, React.DOM.thead(null, React.DOM.tr(null, React.DOM.th(null, 'Date'), React.DOM.th(null, 'Title'), React.DOM.th(null, 'Amount'))), React.DOM.tbody(null, (function() {
+      }, React.DOM.thead(null, React.DOM.tr(null, React.DOM.th(null, 'Date'), React.DOM.th(null, 'Title'), React.DOM.th(null, 'Amount'), React.DOM.th(null, 'Actions'))), React.DOM.tbody(null, (function() {
         var i, len, ref, results;
         ref = this.state.records;
         results = [];
@@ -72,7 +81,8 @@
           record = ref[i];
           results.push(React.createElement(Record, {
             key: record.id,
-            record: record
+            record: record,
+            handleDeleteRecord: this.deleteRecord
           }));
         }
         return results;
