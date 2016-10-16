@@ -25,4 +25,5 @@ $ rails server -b $IP -p $PORT
 # Implementaton of Accounts app Based on tutorial on airpair.com
 https://www.airpair.com/reactjs/posts/reactjs-a-guide-for-rails-developers
 
+We are using jQuery to interact with our backend, and Rails' jquery_ujs unobtrusive driver will include the CSRF token on every AJAX request for us
 
