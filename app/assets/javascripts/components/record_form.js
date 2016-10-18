@@ -22,14 +22,14 @@
     },
     handleSubmit: function(e) {
       e.preventDefault();
-      return $.post('', {
+      return $.post('/records', {
         record: this.state
       }, (function(_this) {
         return function(data) {
           _this.props.handleNewRecord(data);
-          return _this.setState(_this.getInitialState());
+          return _this.setState(_this.getInitialState(), 'JSON');
         };
-      })(this), 'JSON');
+      })(this));
     },
     render: function() {
       return React.DOM.form({

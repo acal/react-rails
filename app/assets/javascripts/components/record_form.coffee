@@ -14,10 +14,11 @@
 
   handleSubmit: (e) ->
     e.preventDefault()
-    $.post '', { record: @state }, (data) =>
+    # Added '/records' so that information gets routed properly
+    $.post '/records', { record: @state }, (data) =>
       @props.handleNewRecord data
-      @setState @getInitialState()
-    , 'JSON'
+      @setState @getInitialState(),
+      'JSON'
 
   render: ->
     React.DOM.form

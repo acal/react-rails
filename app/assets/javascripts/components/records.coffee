@@ -27,11 +27,13 @@
   deleteRecord: (record) ->
     index = @state.records.indexOf record
     records = React.addons.update(@state.records, { $splice: [[index, 1]] })
+    # Could use setState instead of replaceState
     @replaceState records: records
 
   updateRecord: (record, data) ->
     index = @state.records.indexOf record
     records = React.addons.update(@state.records, { $splice: [[index, 1, data]] })
+    # Could use setState instead of replaceState
     @replaceState records: records
 
   render: ->
